@@ -14,7 +14,7 @@ struct ContentView: View {
                   
                   RoundedRectangle(cornerRadius: 10).fill(Color.white)
                   RoundedRectangle(cornerRadius: 10)
-                      .stroke(lineWidth:4)
+                      .stroke(lineWidth:5)
                   Text("👻")
               })
               .padding()
