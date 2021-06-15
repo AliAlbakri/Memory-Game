@@ -12,7 +12,19 @@ class EmojiMemoryGame {
     
     // model pointer
     
-    var model : MemoryGame<String> = MemoryGame<String>(cards: Array<MemoryGame.Card>())
+    var model : MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+        
+    
+    static func createMemoryGame() -> MemoryGame<String>{
+        
+      return  MemoryGame<String>(numberOfPairs: 2, cardContentFactory: { pairIndex in
+             let emojis = ["🥳","🤖"]
+        
+            return emojis[pairIndex]
+        })
+    }
+    
+    
     
     
     // MARK: - Access to the model
