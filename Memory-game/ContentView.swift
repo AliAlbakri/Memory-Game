@@ -9,23 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    var viewModel : EmojiMemoryGame
+    @ObservedObject var viewModel : EmojiMemoryGame
     
     var body: some View {
         
-        HStack{
-            ForEach(viewModel.cards){  card in
+       
+            Grid(viewModel.cards){  card in
                 CardView(card: card).onTapGesture {
                     print(self.viewModel.choose(card: card))
                     
                 }
+                .padding(4)
             }
             
-        }
+        
         
               .padding()
               .foregroundColor(Color.orange)
-                  .font(Font.largeTitle)
     }
       
 }
@@ -36,26 +36,36 @@ struct CardView : View{
     var card : MemoryGame<String>.Card
     
     var body: some View{
-        ZStack{
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white)
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth:5)
-                Text(card.content)
-            }
-            else {
-                RoundedRectangle(cornerRadius: 10)
-                .fill()
-            }
+        GeometryReader{ geometry in
+            ZStack{
+                if self.card.isFaceUp {
+                    RoundedRectangle(cornerRadius: self.cornerRadius)
+                              .fill(Color.white)
+                    RoundedRectangle(cornerRadius: self.cornerRadius)
+                        .stroke(lineWidth:self.edgeLineWidth)
+                    Text(self.card.content)
+                      }
+                      else {
+                    RoundedRectangle(cornerRadius: self.cornerRadius)
+                          .fill()
+                      }
+                      
             
-            
-
-             
+                  }
+            .font(Font.system(size: min(geometry.size.width,geometry.size.height)*self.fontScalingFactor))
+        
             
         }
         
     }
+    
+    
+    // MARK: - Drawing Constants
+    
+    let fontScalingFactor : CGFloat = 0.70
+    let cornerRadius : CGFloat = 10
+    let edgeLineWidth :CGFloat = 3.5
+    
 }
 
 

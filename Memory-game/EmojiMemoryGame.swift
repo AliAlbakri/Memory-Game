@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame:ObservableObject {
     
     // model pointer
     
-    var model : MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+   @Published var model : MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
         
     
     static func createMemoryGame() -> MemoryGame<String>{
