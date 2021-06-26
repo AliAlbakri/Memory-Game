@@ -12,7 +12,23 @@ import Foundation
 struct MemoryGame<CardContent> where CardContent:Equatable {
     var cards: Array<Card>
     
-    var indexOfTheOnlyFaceUpCard:Int?
+    var indexOfTheOnlyFaceUpCard:Int? {
+        get{
+            // filter the indecies such that the index of that card is face up
+            return cards.indices.filter { cards[$0].isFaceUp}.only
+        }
+        
+        set{
+            for index in cards.indices {
+                if index == newValue {
+                    cards[index].isFaceUp = true
+                }
+                else{
+                    cards[index].isFaceUp = false
+                }
+            }
+        }
+    }
     
     init(numberOfPairs:Int,cardContentFactory: (Int)->CardContent) {
         
@@ -27,7 +43,6 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
     
     
    mutating func choose(card:Card) {
-        print("card choosen: \(card)")
     if let choosenIndex = cards.firstIndex(matching: card),!cards[choosenIndex].isFaceUp,!cards[choosenIndex].isMatched{
         
         if let potentialMatchIndex = indexOfTheOnlyFaceUpCard {
@@ -37,15 +52,12 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
                 
                 
             }
-            indexOfTheOnlyFaceUpCard = nil
+            self.cards[choosenIndex].isFaceUp = true
+
         }
        else{
-            for index in cards.indices {
-                cards[index].isFaceUp = false
-            }
             indexOfTheOnlyFaceUpCard = choosenIndex
-        }
-            self.cards[choosenIndex].isFaceUp = true
+            }
         }
         
     }

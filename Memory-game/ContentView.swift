@@ -45,10 +45,13 @@ struct CardView : View{
                         .stroke(lineWidth:self.edgeLineWidth)
                     Text(self.card.content)
                       }
-                      else {
-                    RoundedRectangle(cornerRadius: self.cornerRadius)
+                else {
+                    if(!self.card.isMatched){
+                        RoundedRectangle(cornerRadius: self.cornerRadius)
                           .fill()
-                      }
+                    }
+                    
+                  }
                       
             
                   }
