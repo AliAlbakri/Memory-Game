@@ -10,9 +10,9 @@ import Foundation
 
 
 struct MemoryGame<CardContent> where CardContent:Equatable {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     
-    var indexOfTheOnlyFaceUpCard:Int? {
+    private var indexOfTheOnlyFaceUpCard:Int? {
         get{
             // filter the indecies such that the index of that card is face up
             return cards.indices.filter { cards[$0].isFaceUp}.only
@@ -49,11 +49,8 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
             if cards[potentialMatchIndex].content == cards[choosenIndex].content{
                 cards[potentialMatchIndex].isMatched = true
                 cards[choosenIndex].isMatched = true
-                
-                
             }
             self.cards[choosenIndex].isFaceUp = true
-
         }
        else{
             indexOfTheOnlyFaceUpCard = choosenIndex
@@ -62,8 +59,6 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
         
     }
    
-    
-    
     struct Card : Identifiable {
         var id: Int
         var isFaceUp:Bool = false
