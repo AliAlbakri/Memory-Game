@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3142F08B268BBA8A00EEB2B5 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142F08A268BBA8A00EEB2B5 /* Cardify.swift */; };
 		319F29402680DA790083DA54 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F293F2680DA790083DA54 /* Grid.swift */; };
 		319F29422680E20C0083DA54 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F29412680E20C0083DA54 /* GridLayout.swift */; };
 		31B2C1D5268A6C1F009D57E5 /* pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2C1D4268A6C1F009D57E5 /* pie.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3142F08A268BBA8A00EEB2B5 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		319F293F2680DA790083DA54 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		319F29412680E20C0083DA54 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		31B2C1D4268A6C1F009D57E5 /* pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pie.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				31F664512676D0A8006844D7 /* AppDelegate.swift */,
 				31F664532676D0A8006844D7 /* SceneDelegate.swift */,
 				31F664552676D0A8006844D7 /* ContentView.swift */,
+				3142F08A268BBA8A00EEB2B5 /* Cardify.swift */,
 				31B2C1D4268A6C1F009D57E5 /* pie.swift */,
 				319F293F2680DA790083DA54 /* Grid.swift */,
 				31CDEB352682363300EA59BC /* Array+Identifiable.swift */,
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3142F08B268BBA8A00EEB2B5 /* Cardify.swift in Sources */,
 				31F664522676D0A8006844D7 /* AppDelegate.swift in Sources */,
 				31F664542676D0A8006844D7 /* SceneDelegate.swift in Sources */,
 				31CE6D2726781924000D1FFB /* MemoryGame.swift in Sources */,
