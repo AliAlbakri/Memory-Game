@@ -13,19 +13,24 @@ struct ContentView: View {
     
     var body: some View {
         
-       
+        VStack{
             Grid(viewModel.cards){  card in
                 CardView(card: card).onTapGesture {
-                    print(self.viewModel.choose(card: card))
-                    
+                    withAnimation(.linear(duration:1)){
+                        self.viewModel.choose(card: card)
+                    }
                 }
                 .padding(4)
             }
+            .padding()
+            .foregroundColor(Color.orange)
             
-        
-        
-              .padding()
-              .foregroundColor(Color.orange)
+            Button(action: {
+                withAnimation(.easeInOut(duration:1)){
+                    self.viewModel.startNewGame()
+                }
+            }){ Text("New Game")}
+        }
     }
       
 }
@@ -43,8 +48,11 @@ struct CardView : View{
                     Pie(startAngle:Angle.degrees(0-90), endAngle: Angle.degrees(110-90),clockwise: true).padding(5).opacity(0.4)
                     Text(self.card.content)
                         .font(Font.system(size: min(geometry.size.width,geometry.size.height)*self.fontScalingFactor))
+                        .rotationEffect(Angle.degrees(self.card.isMatched ? 360 : 0))
+                        .animation(self.card.isMatched ? Animation.linear(duration: 0.75).repeatForever(autoreverses: false): .default)
                     }
                 .cardify(isFaceUp: self.card.isFaceUp)
+                .transition(AnyTransition.scale)
             }
             
             

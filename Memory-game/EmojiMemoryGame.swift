@@ -16,7 +16,7 @@ class EmojiMemoryGame:ObservableObject {
         
     
     private static func createMemoryGame() -> MemoryGame<String>{
-        let emojis = ["🥳","🤖","🤡"].shuffled()
+        let emojis = ["🥳","🤖","🤡"]
         
         return MemoryGame<String>(numberOfPairs: emojis.count, cardContentFactory: { pairIndex in
         
@@ -38,6 +38,10 @@ class EmojiMemoryGame:ObservableObject {
     func choose(card:MemoryGame<String>.Card){
         
         model.choose(card: card)
+    }
+    
+    func startNewGame(){
+        model = EmojiMemoryGame.createMemoryGame()
     }
     
     
