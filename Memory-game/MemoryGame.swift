@@ -63,8 +63,77 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
    
     struct Card : Identifiable {
         var id: Int
-        var isFaceUp:Bool = false
-        var isMatched:Bool = false
+        var isFaceUp:Bool = false {
+            didSet{
+                if isFaceUp {
+                    startUsingBounsTime()
+                }
+                else{
+                    stopUsingBounsTime()
+                }
+            }
+        }
+        var isMatched:Bool = false {
+            didSet{
+                stopUsingBounsTime()
+            }
+        }
         var content:CardContent
+        
+        
+        
+        
+        
+        //Bouns Time
+        
+        
+        var bounsTimeLimit : TimeInterval = 6
+        
+        
+        private var faceUpTime:TimeInterval {
+            if let lastFaceUpDate = self.lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+            }
+            else{
+                return pastFaceUpTime
+            }
+        }
+        
+        
+        var lastFaceUpDate:Date?
+        
+        var pastFaceUpTime:TimeInterval = 0
+        
+        var bounsTimeRemaining:TimeInterval {
+            max(0,bounsTimeLimit-faceUpTime)
+        }
+        
+        var bounsRemaining : Double {
+            (bounsTimeLimit > 0 && bounsTimeRemaining > 0) ? bounsTimeRemaining / bounsTimeLimit : 0
+        }
+        
+        var hasEarnedBouns : Bool {
+            isMatched && bounsTimeRemaining > 0
+        }
+        
+        var isConsumingBounsTime : Bool {
+            isFaceUp && !isMatched && bounsTimeRemaining > 0
+        }
+        private mutating func startUsingBounsTime(){
+            if isConsumingBounsTime , lastFaceUpDate == nil {
+                lastFaceUpDate = Date()
+            }
+        }
+        
+        private mutating func stopUsingBounsTime(){
+            pastFaceUpTime = faceUpTime
+            self.lastFaceUpDate = nil
+        }
+        
+        
+        
+        
+        
+        
     }
 }

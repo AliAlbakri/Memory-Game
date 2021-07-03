@@ -40,12 +40,34 @@ struct CardView : View{
     
     var card : MemoryGame<String>.Card
     
+    @State private var animatedBounsRemaining :Double = 0
+    
+    private func startBounsTimeAnimation(){
+        animatedBounsRemaining = card.bounsRemaining
+        withAnimation(.linear(duration:card.bounsTimeRemaining)){
+            animatedBounsRemaining = 0
+        }
+    }
+    
     var body: some View{
         GeometryReader{ geometry in
             
             if self.card.isFaceUp || !self.card.isMatched{
                 ZStack{
-                    Pie(startAngle:Angle.degrees(0-90), endAngle: Angle.degrees(110-90),clockwise: true).padding(5).opacity(0.4)
+                    Group{
+                        if self.card.isConsumingBounsTime {
+                            Pie(startAngle:Angle.degrees(0-90), endAngle: Angle.degrees(-self.animatedBounsRemaining*360-90),clockwise: true)
+                                .onAppear{
+                                    self.startBounsTimeAnimation()
+                            }
+                            
+                        }
+                        else{
+                            Pie(startAngle:Angle.degrees(0-90), endAngle: Angle.degrees(-self.card.bounsRemaining*360-90),clockwise: true)
+                        }
+                        
+                    }
+                    .padding(5).opacity(0.4)
                     Text(self.card.content)
                         .font(Font.system(size: min(geometry.size.width,geometry.size.height)*self.fontScalingFactor))
                         .rotationEffect(Angle.degrees(self.card.isMatched ? 360 : 0))
